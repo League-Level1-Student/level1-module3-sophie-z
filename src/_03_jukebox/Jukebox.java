@@ -5,6 +5,8 @@ package _03_jukebox;
  */
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -24,32 +26,34 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JButton FrenchJazz = new JButton("French Jazz");
+	JButton Memories = new JButton("Memories");
+	Song FJ = new Song("FrenchJazz.mp3");
+	Song M = new Song("Memories.mp3");
     public void run() {
-
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
-Song song = new Song("FrenchJazz.mp3");
 		// 3. Play the Song
-song.play();
-		/*
+
+/*
 		 * 4. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
 		 * each song, or a picture of the album cover. When the button or album
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
-JFrame frame = new JFrame();
 frame.setVisible(true);
-JPanel panel = new JPanel();
-JButton button = new JButton();
-JTextField JT = new JTextField("French Jazz");
-panel.add(button);
-panel.add(JT);
+FrenchJazz.addActionListener(this);
+Memories.addActionListener(this);
+panel.add(FrenchJazz);
+panel.add(Memories);
 frame.add(panel);
 frame.pack();
-    }
+
+}
     
     
 	/* Use this method to add album covers to your Panel. */
@@ -57,6 +61,20 @@ frame.pack();
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(FrenchJazz)) {
+			M.stop();
+			FJ.play();
+		}
+		if(e.getSource().equals(Memories)) {
+			FJ.stop();
+			M.play();
+		}
 	}
 
 }
