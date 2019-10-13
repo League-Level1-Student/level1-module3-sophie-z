@@ -21,6 +21,5 @@ public static void main(String[] args) {
 	System.out.println(InfinityWar);
 	Marvel.sortMoviesByRating();
 	System.out.println("The best movie is " + Marvel.getBestMovie());
-	System.out.println("The second best movie is " + Marvel.;
 }
 }
