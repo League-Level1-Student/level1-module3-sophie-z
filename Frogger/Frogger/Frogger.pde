@@ -1,6 +1,6 @@
 int frogX = 400;
 int frogY = 570;
-int size;
+
 Car car1 = new Car(600, 450, 5);
 Car car2  = new Car(500, 300, 5);
 Car car3 = new Car(400, 150, 5);
@@ -19,9 +19,20 @@ void draw(){
   intersects(car2);
   car3.moveLeft();
   car3.display();
-  intersects(car3);
-  if(intersects(car1)){
+  print(intersects(car3));
   
+  if(intersects(car1)){
+  frogX = 400;
+  frogY = 570;
+  }
+  if(intersects(car2)){
+  
+  frogX = 400;
+  frogY = 570;
+  }
+  if(intersects(car3)){
+  frogX = 400;
+  frogY = 570;
   }
 }
 void keyPressed(){
@@ -62,6 +73,7 @@ class Car{
 int carX = 0;
 int carY = 0;
 int carSpeed = 1;
+int size = 50;
 
 void moveLeft(){
 carX = carX - carSpeed;
@@ -81,11 +93,12 @@ Car(int carX, int carY, int carSpeed){
   this.carX= carX;
   this.carY = carY;
   this.carSpeed = carSpeed;
+  size = 50;
 }
 
 void display(){
       fill(#FF8000);
-      rect(carX, carY, 70, 50);
+      rect(carX, carY, size, size);
 }
 
 int getX(){
